@@ -3,6 +3,7 @@ import '../src/styles/App.css'
 import { useEffect,useState } from 'react'
 import ClimaCard from './ClimaCard'
 import Loading from './Loading'
+import ClimaForm from './ClimaForm'
 function App() {
 
  const [clima, setClima] = useState(null) 
@@ -11,14 +12,16 @@ function App() {
 
  const [image, setImage] = useState(null)
 
- const loadInfo = async(ciudad ="Sevilla") =>{
+ const loadInfo = async(ciudad ="Comunidad Valenciana") =>{
   try {
     const response = await axios.get(`${import.meta.env.VITE_APP_CLIMA}&key=${import.meta.env.VITE_APP_KEY}&q=${ciudad}`)
 
     const data = response.data
     setClima(data)
+    
     console.log(data)
     console.log(response)
+  
     const imagenApi = await axios.get(`https://api.unsplash.com/search/photos`, {
       params: { query: ciudad, client_id: import.meta.env.VITE_UNSPLASH_ACCESS_KEY, per_page: 1 }
     });
@@ -26,10 +29,13 @@ function App() {
     setImage(imageUrl);
     setLoading(false)
 
-    console.log(imagenApi)
+   
   } catch (error) {
     console.log(error)
-    setLoading(false)
+    setLoading(true)
+    return  alert("ingrese una ciudad valida")
+    
+    
   }
 } 
 
@@ -57,21 +63,28 @@ const style = {
   alignItems: 'center',
 };
 
+const handleChange =(ciudad) =>{
+loadInfo(ciudad)
+}
+
+
   return (
-    <>
+    <> 
+    
     <div className='app-container' style={style}> 
+     
     {loading ? (
       <div style={{ display: 'flex', justifyContent: 'center' ,textAlign:'center' }} > 
       <Loading /> 
       </div>// Show the spinner while loading
-    ) : (
+    ) : ( 
+      <div> <ClimaForm changeCity={handleChange} ></ClimaForm>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <ClimaCard infoClima={clima} imageUrl={image} />
+        <ClimaCard infoClima={clima}/>
       </div>
-
+</div>
     )}
     </div>
-           
   </>
 );
 }
