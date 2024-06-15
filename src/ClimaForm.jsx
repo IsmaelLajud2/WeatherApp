@@ -29,7 +29,7 @@ const ClimaForm = ({changeCity}) => {
     <form className='formStyles' onSubmit={handleSubmit}  >
         <input placeholder='Ingrese una ciudad' type="text" name="city" id="" onChange={handleChange} />
         
-       <Button variant="outline-light" className='button-form' onClick={handleSubmit}>Buscar</Button>
+       <Button variant="info" className='button-form' onClick={handleSubmit}>Buscar 🧭</Button>
     </form> 
        
     </>

@@ -12,10 +12,10 @@ function App() {
 
  const [image, setImage] = useState(null)
 
- const loadInfo = async(ciudad ="Comunidad Valenciana") =>{
+ const loadInfo = async(ciudad ="Barcelona") =>{
   try {
-    const response = await axios.get(`${import.meta.env.VITE_APP_CLIMA}&key=${import.meta.env.VITE_APP_KEY}&q=${ciudad}`)
-
+    const response = await axios.get(`${import.meta.env.VITE_CLIMA_API_URL}&key=${import.meta.env.VITE_API_KEY_WEATHER}&q=${ciudad}&days=4`) 
+     
     const data = response.data
     setClima(data)
     
@@ -54,15 +54,7 @@ useEffect(() => {
 
 const style = {
   backgroundImage: `url(${image})`,
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
-  minHeight: '100vh', 
-  display: 'flex',
-  minwidth: '100vw',
-  justifyContent: 'center',
-  alignItems: 'center',
-};
-
+}
 const handleChange =(ciudad) =>{
 loadInfo(ciudad)
 }
@@ -79,9 +71,18 @@ loadInfo(ciudad)
       </div>// Show the spinner while loading
     ) : ( 
       <div> <ClimaForm changeCity={handleChange} ></ClimaForm>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <ClimaCard infoClima={clima}/>
-      </div>
+               <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '20px' }}>
+   
+
+               {
+               clima ?
+               clima?.forecast?.forecastday.map(( forecastItem =clima, index) => (
+                <ClimaCard key={index} infoClima={{ location: clima.location, current: clima.current, forecastItem }} />
+              ))
+            : ""
+            }
+        
+        </div>
 </div>
     )}
     </div>

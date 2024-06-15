@@ -7,7 +7,7 @@
   border-radius: 15px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   width: 100%; /* Utiliza el ancho completo disponible */
-  max-width: 600px ;
+  max-width: 400px ;
   margin: 20px auto;
   overflow: hidden;
   color: #fff;
@@ -38,7 +38,7 @@
 }
 
 .clima-card-text {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   margin: 15px 0; 
   font-family: "Nanum Gothic", sans-serif;
   font-weight: 400;
