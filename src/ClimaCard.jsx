@@ -47,14 +47,14 @@ const forecastDateObj = configTime(forecastItem?.date)
         
           <p className="clima-card-text">Date:{forecastDateObj.date}</p>
 
-          <h2 className="clima-card-title">{location?.name}, {location?.region}</h2>
-          <h1 className="clima-card-text">País: {location?.country}</h1>
-          <p className="clima-card-text">Condición: {current?.condition?.text}  <img src={`http:${current?.condition.icon}`} width='35px' ></img>
+          <h2 className="clima-card-title">{location?.name}, {location?.region} , {location?.country}</h2>
+          <h1 className="clima-card-text">Humedad : {forecastItem.day?.avghumidity} %</h1>
+          <p className="clima-card-text">Condición: {forecastItem?.day?.condition?.text}  <img src={`http:${current?.condition.icon}`} width='35px' ></img>
           </p>
-          <p className="clima-card-text">Hora: {time} {amPM}</p>
-          <p className="clima-card-text">Día: {date}</p>
-          <p className="clima-card-text">Temperatura: {current?.temp_c}°C , {current?.temp_f}ºF</p>
-          <p className="clima-card-text">Latitud: {location?.lat} , Longitud: {location?.lon}</p>
+          <p className="clima-card-text">Hora Local: {time} {amPM}</p>
+          <p className="clima-card-text">Probabilidad de lluvia : {forecastItem?.day?.daily_chance_of_rain} %</p>
+          <p className="clima-card-text">Mínima: {forecastItem?.day?.mintemp_c}°C , {forecastItem?.day?.mintemp_f}ºF</p>
+          <p className="clima-card-text">Maxima: {forecastItem?.day?.maxtemp_c}°C ,  {forecastItem?.day?.maxtemp_f}ºF</p>
 
         </div>
 
